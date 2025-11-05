@@ -6,14 +6,21 @@ namespace ScreenSaverFNA
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+        Texture2D snowflakeTexture;
+        Texture2D backgroundTexture;
 
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+                PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
+            };
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            graphics.IsFullScreen = true;
         }
 
         protected override void Initialize()
@@ -25,9 +32,11 @@ namespace ScreenSaverFNA
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            snowflakeTexture = Content.Load<Texture2D>("snowflake");
+            backgroundTexture = Content.Load<Texture2D>("switzerkand");
         }
 
         protected override void Update(GameTime gameTime)
@@ -45,6 +54,9 @@ namespace ScreenSaverFNA
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
