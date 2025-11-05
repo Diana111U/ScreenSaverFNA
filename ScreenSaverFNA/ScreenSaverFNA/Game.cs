@@ -56,10 +56,20 @@ namespace ScreenSaverFNA
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().GetPressedKeys().Length > 0)
+            {
                 Exit();
+            }
 
             // TODO: Add your update logic here
+            for (var i = 0; i < activeSnowflakesCount; i++)
+            {
+                Snowflakes[i].Y += Snowflakes[i].Speed;
+                if (Snowflakes[i].Y > graphics.PreferredBackBufferHeight)
+                {
+                    Snowflakes[i].Y = -Snowflakes[i].Size;
+                }
+            }
 
             base.Update(gameTime);
         }
