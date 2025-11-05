@@ -4,14 +4,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ScreenSaverFNA
 {
-    public class Game1 : Game
+    public class Game : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         Texture2D snowflakeTexture;
         Texture2D backgroundTexture;
 
-        public Game1()
+        public Game()
         {
             graphics = new GraphicsDeviceManager(this)
             {
