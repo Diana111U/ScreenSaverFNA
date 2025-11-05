@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ScreenSaverFNA.Classes;
+using System;
 
 namespace ScreenSaverFNA
 {
@@ -10,6 +12,9 @@ namespace ScreenSaverFNA
         private SpriteBatch spriteBatch;
         Texture2D snowflakeTexture;
         Texture2D backgroundTexture;
+        const int SnowflakesCount = 100;
+        int activeSnowflakesCount = 0;
+        private readonly Snowflake[] Snowflakes = new Snowflake[SnowflakesCount];
 
         public Game()
         {
@@ -37,6 +42,16 @@ namespace ScreenSaverFNA
             // TODO: use this.Content to load your game content here
             snowflakeTexture = Content.Load<Texture2D>("snowflake");
             backgroundTexture = Content.Load<Texture2D>("switzerkand");
+            var rnd = new Random();
+            var Sizes = new[] { 32, 64 };
+            for (var i = 0; i < SnowflakesCount; i++)
+            {
+                var x = rnd.Next(graphics.PreferredBackBufferWidth);
+                var size = Sizes[rnd.Next(2)];
+                var y = -size;
+                var speed = 6 * size / 64;
+                Snowflakes[i] = new Snowflake(x, y, size, speed);
+            }
         }
 
         protected override void Update(GameTime gameTime)
