@@ -12,7 +12,7 @@ namespace ScreenSaverFNA
         private SpriteBatch spriteBatch;
         Texture2D snowflakeTexture;
         Texture2D backgroundTexture;
-        const int SnowflakesCount = 100;
+        const int SnowflakesCount = 1250;
         int activeSnowflakesCount = 0;
         private readonly Snowflake[] Snowflakes = new Snowflake[SnowflakesCount];
 
@@ -43,7 +43,7 @@ namespace ScreenSaverFNA
             snowflakeTexture = Content.Load<Texture2D>("snowflake");
             backgroundTexture = Content.Load<Texture2D>("switzerkand");
             var rnd = new Random();
-            var Sizes = new[] { 32, 64 };
+            var Sizes = new[] { 24, 32 };
             for (var i = 0; i < SnowflakesCount; i++)
             {
                 var x = rnd.Next(graphics.PreferredBackBufferWidth);
@@ -70,7 +70,10 @@ namespace ScreenSaverFNA
                     Snowflakes[i].Y = -Snowflakes[i].Size;
                 }
             }
-
+            if (activeSnowflakesCount < SnowflakesCount)
+            {
+                activeSnowflakesCount++;
+            }
             base.Update(gameTime);
         }
 
@@ -81,6 +84,10 @@ namespace ScreenSaverFNA
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
+            for (int i = 0; i < activeSnowflakesCount; i++)
+            {
+                spriteBatch.Draw(snowflakeTexture, new Rectangle(Snowflakes[i].X, Snowflakes[i].Y, Snowflakes[i].Size, Snowflakes[i].Size), Color.White);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
