@@ -10,10 +10,11 @@ namespace ScreenSaverFNA
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        Texture2D snowflakeTexture;
-        Texture2D backgroundTexture;
-        const int SnowflakesCount = 1250;
-        int activeSnowflakesCount = 0;
+
+        private Texture2D snowflakeTexture;
+        private Texture2D backgroundTexture;
+        private const int SnowflakesCount = 1250;
+        private int activeSnowflakesCount = 0;
         private readonly Snowflake[] Snowflakes = new Snowflake[SnowflakesCount];
 
         public Game()
