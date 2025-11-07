@@ -29,18 +29,9 @@ namespace ScreenSaverFNA
             graphics.IsFullScreen = true;
         }
 
-        protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-
-            base.Initialize();
-        }
-
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
             snowflakeTexture = Content.Load<Texture2D>("snowflake");
             backgroundTexture = Content.Load<Texture2D>("switzerkand");
             var rnd = new Random();
@@ -61,8 +52,6 @@ namespace ScreenSaverFNA
             {
                 Exit();
             }
-
-            // TODO: Add your update logic here
             for (var i = 0; i < activeSnowflakesCount; i++)
             {
                 Snowflakes[i].Y += Snowflakes[i].Speed;
@@ -81,8 +70,6 @@ namespace ScreenSaverFNA
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
             spriteBatch.Begin();
             spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
             for (int i = 0; i < activeSnowflakesCount; i++)
